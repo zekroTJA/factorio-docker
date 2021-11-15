@@ -19,6 +19,14 @@ $ docker run \
     ghcr.io/zekrotja/factorio:latest
 ```
 
+Or, when you want to use the provided `docker-compose.yml`, download it and run the stack.
+
+```
+$ curl -Lo docker-compose.yml \
+    https://raw.githubusercontent.com/zekroTJA/factorio-docker/master/docker-compose.yml
+$ docker-compose up -d
+```
+
 ## Saves
 
 When you do not put a save file in the mounted `save` (`/var/save` mount) volume, a new game save is created. If you want, you can pass [parameters](https://wiki.factorio.com/Command_line_parameters) to the game creation process using the `CREATE_ARGS` evnironment vaiable.
@@ -43,3 +51,5 @@ $ docker run \
     ghcr.io/zekrotja/factorio:latest \
         --server-settings /var/config/server-settings.json
 ```
+
+You can also specify custom locations for ban or white lists by passing [parameters](https://wiki.factorio.com/Command_line_parameters) and binding the specific paths to volumes.
