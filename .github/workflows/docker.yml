@@ -24,7 +24,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Fetch Version
         run: |-
-          echo "VERSION=$(./scripts/version.sh)" >> $GITHUB_ENV
+          echo "VERSION=$(sh ./scripts/version.sh)" >> $GITHUB_ENV
+      - run: sh ./scripts/version.sh
       - name: Build & Push
         uses: docker/build-push-action@v2
         with:

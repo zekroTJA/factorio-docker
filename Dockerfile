@@ -6,7 +6,7 @@ WORKDIR /var/server
 COPY scripts /var/scripts
 RUN apt-get update -y && \
     apt-get install -y curl jq xz-utils
-RUN V=$(/var/scripts/version.sh $VERSION); \
+RUN V=$(sh /var/scripts/version.sh $VERSION); \
     curl -Lo server.tar.xz https://www.factorio.com/get-download/${V}/headless/linux64
 RUN tar xJf server.tar.xz && \
     rm server.tar.xz
