@@ -15,4 +15,4 @@ RUN chmod +x /var/server/factorio/bin/x64/factorio
 VOLUME /var/save
 VOLUME /var/mods
 EXPOSE 34197
-ENTRYPOINT ["/var/scripts/entrypoint.sh"]
+ENTRYPOINT ["sh", "/var/scripts/entrypoint.sh"]
