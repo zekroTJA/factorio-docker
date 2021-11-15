@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  factorio:
+    image: "ghcr.io/zekrotja/factorio:latest"
+    ports:
+      - "34197:34197/udp"
+    volumes:
+      - "./factorio/save:/var/save"
+      - "./factorio/mods:/var/mods"
+    restart: "on-failure"
+    stdin_open: true
+    tty: true

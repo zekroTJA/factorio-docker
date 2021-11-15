@@ -1,0 +1,35 @@
+name: Docker Build
+on:
+  push:
+    branches:
+      - "master"
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  docker:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Log in to ghcr
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fetch Version
+        run: |-
+          echo "VERSION=$(./scripts/version.sh)" >> $GITHUB_ENV
+      - name: Build & Push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          no-cache: false
+          tags: |
+            ghcr.io/zekrotja/factorio:latest
+            ghcr.io/zekrotja/factorio:${{ env.VERSION }}
