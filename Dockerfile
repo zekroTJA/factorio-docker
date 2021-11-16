@@ -11,6 +11,8 @@ RUN V=$(sh /var/scripts/version.sh $VERSION); \
 RUN tar xJf server.tar.xz && \
     rm server.tar.xz
 RUN chmod +x /var/server/factorio/bin/x64/factorio
+RUN mkdir /var/server/factorio/saves && \
+    ln -s /var/server/factorio/saves /var/save
 
 VOLUME /var/save
 VOLUME /var/mods

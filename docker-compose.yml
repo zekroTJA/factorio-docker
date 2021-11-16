@@ -2,6 +2,7 @@ version: "3"
 
 services:
   factorio:
+    build: '.'
     image: "ghcr.io/zekrotja/factorio:latest"
     ports:
       - "34197:34197/udp"
