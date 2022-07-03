@@ -2,13 +2,19 @@ version: "3"
 
 services:
   factorio:
-    build: '.'
+    build: "."
     image: "ghcr.io/zekrotja/factorio:latest"
     ports:
       - "34197:34197/udp"
     volumes:
       - "./factorio/save:/var/save"
       - "./factorio/mods:/var/mods"
+      - "./factorio/whitelist.json:/var/cfg/whitelist.json"
+      - "./factorio/admins.json:/var/cfg/admins.json"
     restart: "on-failure"
     stdin_open: true
     tty: true
+    command:
+      - "--use-server-whitelist true"
+      - "--server-whitelist /var/cfg/whitelist.json"
+      - "--server-adminlist /var/cfg/admins.json"
