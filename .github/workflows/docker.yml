@@ -34,3 +34,20 @@ jobs:
           tags: |
             ghcr.io/zekrotja/factorio:latest
             ghcr.io/zekrotja/factorio:${{ env.VERSION }}
+  print_current_version:
+    name: "Print Current Version"
+    runs-on: ubuntu-latest
+    needs: 
+      - docker_build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Echo Version
+        run: |-
+          echo $(bash scripts/version.sh) > current_version.txt
+      - name: Commit & Push
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: update current version
+          branch: master
